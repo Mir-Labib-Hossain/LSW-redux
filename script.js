@@ -1,68 +1,24 @@
-// select dom elements
-const counterEl = document.getElementById("counter");
-const incrementEl = document.getElementById("increment");
-const decrementEl = document.getElementById("decrement");
+const actions = [
+  { type: "increment", payload: 1 },
+  { type: "increment", payload: 1 },
+  { type: "decrement", payload: 1 },
+  { type: "increment", payload: 1 },
+];
 
-// action identifiers
-const INCREMENT = "increment";
-const DECREMENT = "decrement";
+const initialState = { value: 0 };
 
-// action creators
-const increment = (value) => {
+const counterReducer = (state, action) => {
+  if (action.type == "increment") {
     return {
-        type: INCREMENT,
-        payload: value,
+      ...state,
+      value: action.payload + 1,
     };
-};
-
-const decrement = (value) => {
+  } else if (action.type == "decrement") {
     return {
-        type: DECREMENT,
-        payload: value,
+      ...state,
+      value: action.payload - 1,
     };
+  }
 };
 
-// initial state
-const initialState = {
-    value: 0,
-};
-console.log(initialState);
-// create reducer function
-function counterReducer(state = initialState, action) {
-    console.log(initialState);
-    if (action.type === INCREMENT) {
-        return {
-            ...state,
-            value: state.value + action.payload,
-        };
-    } else if (action.type === DECREMENT) {
-        return {
-            ...state,
-            value: state.value - action.payload,
-        };
-    } else {
-        return state;
-    }
-}
-
-// create store
-const store = Redux.createStore(counterReducer);
-
-const render = () => {
-    const state = store.getState();
-    counterEl.innerText = state.value.toString();
-};
-
-// update UI initially
-render();
-
-store.subscribe(render);
-
-// button click listeners
-incrementEl.addEventListener("click", () => {
-    store.dispatch(increment(3));
-});
-
-decrementEl.addEventListener("click", () => {
-    store.dispatch(decrement(2));
-});
+console.log(actions.reduce(counterReducer, initialState)); // expected output is 2

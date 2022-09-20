@@ -7,7 +7,7 @@ const initialValues = [
 ];
 const App: React.FC = () => {
   const [state, setState] = useState(initialValues);
-  const sum = state.reduce((total, state) =>  total + state.count,0);
+  const sum = state.reduce((total, state) => total + state.count, 0);
   const inc = (id: number) => {
     const updatedState = state.map((counter) => {
       if (counter.id == id) {
@@ -39,7 +39,7 @@ const App: React.FC = () => {
       {state.map(({ id, count }) => {
         return <Counter key={id} id={id} count={count} inc={inc} dec={dec} />;
       })}
-      <Sum sum={sum}/>
+      <Sum sum={sum} />
     </>
   );
 };
