@@ -1,11 +1,14 @@
-import React from 'react'
+import { Provider } from "react-redux";
+import store from "./redux/store";
 
-type Props = {}
+type Props = {};
 
 const App = (props: Props) => {
   return (
-    <div>App</div>
-  )
-}
+    <Provider store={store}>
+      <div>App</div>
+    </Provider>
+  );
+};
 
-export default App
+export default App;
