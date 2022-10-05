@@ -1,9 +1,39 @@
-import React from 'react'
-import Cards from '../cards'
+import { useDispatch, useSelector } from "react-redux";
+import { filterAuthorName, filterCategory } from "../../redux/filter/actions";
+import Cards from "../cards";
 
 const Body = () => {
+  const filteredCategory = useSelector((state: IState) => state.filterReducer.category);
+  const filteredAuthorName = useSelector((state: IState) => state.filterReducer.authorName);
+  const dispatch = useDispatch();
+  const removeCategoryFilter = () => {
+    dispatch(filterCategory(""));
+  };
+  const removeAuthorFilter = () => {
+    dispatch(filterAuthorName(""));
+  };
   return (
-    <section className="relative bg-gray-50 pt-8 pb-20 px-4 sm:px-6 lg:pt-16 lg:pb-16 lg:px-8">
+    <>
+      <div className="text-center flex justify-center mt-5">
+        {filteredCategory && (
+          <p className="text-sm font-medium text-indigo-600">
+            <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">
+              {filteredCategory}
+              <img className="h-3 ml-2 cursor-pointer" src="https://cdn-icons-png.flaticon.com/512/59/59836.png" alt="" onClick={removeCategoryFilter} />
+            </span>
+          </p>
+        )}
+
+        {filteredAuthorName && (
+          <p className="text-sm font-medium text-yellow-300	ml-3">
+            <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-yellow-100 text-yellow-800">
+              {filteredAuthorName}
+              <img className="h-3 ml-2 cursor-pointer " src="https://cdn-icons-png.flaticon.com/512/59/59836.png" alt="" onClick={removeAuthorFilter} />
+            </span>
+          </p>
+        )}
+      </div>
+      <section className="relative bg-gray-50 px-4 sm:px-6 lg:pt-16 lg:pb-16 lg:px-8">
         <div className="absolute inset-0">
           <div className="bg-white h-1/3 sm:h-2/3"></div>
         </div>
@@ -15,7 +45,8 @@ const Body = () => {
           <Cards />
         </div>
       </section>
-  )
-}
+    </>
+  );
+};
 
-export default Body
+export default Body;

@@ -1,10 +1,19 @@
+import { useDispatch } from "react-redux";
+import { filterAuthorName, filterCategory } from "../../redux/filter/actions";
+
 type Props = {
   blog: IBlog;
 };
 
 const Card = ({ blog }: Props) => {
-  const { coverImg, title, category, author }: IBlog = blog;
-
+  const { coverImg, category, title, author }: IBlog = blog;
+  const dispatch = useDispatch();
+  const handleFilterCategory = () => {
+    dispatch(filterCategory(category));
+  };
+  const handleFilterAuthor = () => {
+    dispatch(filterAuthorName(author.name));
+  };
   return (
     <div className="flex flex-col rounded-lg shadow-lg overflow-hidden">
       <div className="flex-shrink-0">
@@ -12,7 +21,7 @@ const Card = ({ blog }: Props) => {
       </div>
       <div className="flex-1 bg-white p-6 flex flex-col justify-between">
         <div className="flex-1">
-          <p className="text-sm font-medium text-indigo-600">
+          <p className="text-sm font-medium text-indigo-600 cursor-pointer" onClick={handleFilterCategory}>
             <span className="inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium bg-indigo-100 text-indigo-800">{category}</span>
           </p>
           <a href="#" className="block mt-1">
@@ -20,11 +29,13 @@ const Card = ({ blog }: Props) => {
           </a>
         </div>
         <div className="mt-6 flex items-center">
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 cursor-pointer" onClick={handleFilterAuthor}>
             <img className="h-10 w-10 rounded-full" src={author.image} alt="" />
           </div>
           <div className="ml-3">
-            <p className="text-sm font-medium text-gray-900 hover:underline">{author.name}</p>
+            <p className="text-sm font-medium text-gray-900 hover:underline cursor-pointer" onClick={handleFilterAuthor}>
+              {author.name}
+            </p>
             <div className="flex space-x-1 text-sm text-gray-500">
               <time>11 Jul, 2022</time>
               <span aria-hidden="true">&middot;</span>
