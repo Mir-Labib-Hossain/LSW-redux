@@ -8,7 +8,7 @@
   <h3>Branch : 3-todo</h3>
   <img  src="https://github.com/Mir-Labib-Hossain/LSW-redux/blob/master/src/assets/images/ss-3-todo.png" alt="responsive" width="100%" height="auto" />
   <hr>
-  <h3>Branch : 3.1-blog app</h3>
+  <h3>Branch : 3.10-blog app</h3>
   <img  src="https://github.com/Mir-Labib-Hossain/LSW-redux/blob/master/src/assets/images/ss-3.10-blog.png" alt="responsive" width="100%" height="auto" />
 
           
