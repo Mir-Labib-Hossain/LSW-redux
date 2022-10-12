@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAppDispatch } from "../redux/hooks";
 import fetchTodos from "../redux/todos/thunk/fetchTodos";
 import Todo from "./Todo";
 type Props = {};
 
 function Todos({}: Props) {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
+
   const todos = useSelector((state: any) => state.todosReducer);
   const filters = useSelector((state: any) => state.filtersReducer);
-
   const { status, colors } = filters;
 
   const filterByColors = (todo: ITodo) => {

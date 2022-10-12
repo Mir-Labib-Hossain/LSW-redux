@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { added, allCompleted, clearCompleted } from "../redux/todos/actions";
+import { allCompleted, clearCompleted } from "../redux/todos/actions";
+import addTodo from "../redux/todos/thunk/addTodo";
 
 function Header() {
   const dispatch = useDispatch();
@@ -13,7 +14,8 @@ function Header() {
 
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(added(inputedText));
+    // ignore this error
+    dispatch(addTodo(inputedText));
   };
 
   const handleCompleteAll = () => {
@@ -37,7 +39,9 @@ function Header() {
           <img className="w-4 h-4" src="./src/assets/images/double-tick.png" alt="Complete" />
           <span>Complete All Tasks</span>
         </li>
-        <li className="cursor-pointer" onClick={handleClearCompleted}>Clear completed</li>
+        <li className="cursor-pointer" onClick={handleClearCompleted}>
+          Clear completed
+        </li>
       </ul>
     </div>
   );

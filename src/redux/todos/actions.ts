@@ -7,10 +7,10 @@ export const loaded = (todos: ITodos) => {
   };
 };
 
-export const added = (text: string) => {
+export const added = (todo:ITodo) => {
   return {
     type: ADDED,
-    payload: { text },
+    payload: { todo },
   };
 };
 

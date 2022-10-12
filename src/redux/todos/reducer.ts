@@ -16,15 +16,10 @@ export const todosReducer = (state = initialState, { type, payload }: ITodosActi
     case ADDED:
       return [
         ...state,
-        {
-          id: newId(state),
-          text: payload.text,
-        },
+        payload.todo
       ];
 
     case TOGGLED:
-      console.log(TOGGLED);
-
       return state.map((todo: ITodo) => {
         if (payload.id === todo.id) {
           return {
@@ -35,8 +30,6 @@ export const todosReducer = (state = initialState, { type, payload }: ITodosActi
       });
 
     case COLORSELECTED:
-      console.log(COLORSELECTED);
-
       return state.map((todo: ITodo) => {
         if (payload.id === todo.id) {
           return {
@@ -47,8 +40,6 @@ export const todosReducer = (state = initialState, { type, payload }: ITodosActi
       });
 
     case DELETED:
-      console.log(DELETED);
-
       return state.filter((todo: ITodo) => todo.id !== payload.id);
 
     case ALLCOMPLETED:
