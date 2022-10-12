@@ -1,32 +1,24 @@
-import { ADDED, ALLCOMPLETED, CLEARCOMPLETED, COLORSELECTED, DELETED, TOGGLED } from "./actionTypes";
+import { ADDED, ALLCOMPLETED, CLEARCOMPLETED, COLORSELECTED, DELETED, LOADED, TOGGLED } from "./actionTypes";
 
-const initialState: ITodos = [
-  {
-    todoId: 1,
-    todoText: "Learn React",
-    completed: true,
-  },
-  {
-    todoId: 2,
-    todoText: "Learn Redux",
-    completed: false,
-  },
-];
+const initialState: ITodos = [];
 
 const newId = (state: ITodos) => {
   return state.reduce((maxId: number, todo: ITodo) => {
-    Math.max(maxId, todo.todoId);
+    Math.max(maxId, todo.id);
   }, 0);
 };
 
 export const todosReducer = (state = initialState, { type, payload }: ITodosAction) => {
   switch (type) {
+    case LOADED:
+      return payload.todos;
+
     case ADDED:
       return [
         ...state,
         {
-          todoId: newId(state),
-          todoText: payload.todoText,
+          id: newId(state),
+          text: payload.text,
         },
       ];
 
@@ -34,7 +26,7 @@ export const todosReducer = (state = initialState, { type, payload }: ITodosActi
       console.log(TOGGLED);
 
       return state.map((todo: ITodo) => {
-        if (payload.todoId === todo.todoId) {
+        if (payload.id === todo.id) {
           return {
             ...todo,
             completed: !todo.completed,
@@ -46,7 +38,7 @@ export const todosReducer = (state = initialState, { type, payload }: ITodosActi
       console.log(COLORSELECTED);
 
       return state.map((todo: ITodo) => {
-        if (payload.todoId === todo.todoId) {
+        if (payload.id === todo.id) {
           return {
             ...todo,
             color: payload.color,
@@ -57,7 +49,7 @@ export const todosReducer = (state = initialState, { type, payload }: ITodosActi
     case DELETED:
       console.log(DELETED);
 
-      return state.filter((todo: ITodo) => todo.todoId !== payload.todoId);
+      return state.filter((todo: ITodo) => todo.id !== payload.id);
 
     case ALLCOMPLETED:
       return state.map((todo: ITodo) => {

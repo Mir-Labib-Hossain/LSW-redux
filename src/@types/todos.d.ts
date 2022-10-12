@@ -1,8 +1,8 @@
 interface ITodo {
-    todoId:number
-    todoText:string
-    color:string
-    completed:boolean
+  id: number;
+  text: string;
+  color: string;
+  completed: boolean;
 }
 
-type ITodos = todo[]
+type ITodos = todo[];

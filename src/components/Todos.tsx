@@ -1,9 +1,12 @@
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useAppDispatch } from "../redux/hooks";
+import fetchTodos from "../redux/todos/thunk/fetchTodos";
 import Todo from "./Todo";
-
 type Props = {};
 
 function Todos({}: Props) {
+  const dispatch = useAppDispatch();
   const todos = useSelector((state: any) => state.todosReducer);
   const filters = useSelector((state: any) => state.filtersReducer);
 
@@ -12,6 +15,11 @@ function Todos({}: Props) {
   const filterByColors = (todo: ITodo) => {
     return colors.length === 0 || colors.includes(todo.color);
   };
+
+  useEffect(() => {
+    // ignore this error
+    dispatch(fetchTodos);
+  }, [dispatch]);
 
   const filterByStatus = (todo: ITodo) => {
     switch (status) {
@@ -30,7 +38,7 @@ function Todos({}: Props) {
         .filter(filterByStatus)
         .filter(filterByColors)
         .map((todo: ITodo) => (
-          <Todo todo={todo} key={todo.todoId} />
+          <Todo todo={todo} key={todo.id} />
         ))}
     </div>
   );

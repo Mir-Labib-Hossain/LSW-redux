@@ -1,6 +1,6 @@
 interface ITodosPayload {
-  todoId?: number;
-  todoText?: string;
+  id?: number;
+  text?: string;
   color?: string;
 }
 
