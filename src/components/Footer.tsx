@@ -56,8 +56,8 @@ function Footer({}: Props) {
         <li></li>
         <li></li>
         <li className={`h-3 w-3 border-2 border-green-500 md:hover:bg-green-500 rounded-full cursor-pointer ${checkColorIncludes("green") && "bg-green-500"} `} onClick={() => handleColorChange("green")}></li>
-        <li className={`h-3 w-3 border-2 border-red-500 md:hover:bg-red-500 rounded-full cursor-pointer ${checkColorIncludes("red") && "bg-red-500"} `} onClick={() => handleColorChange("red")}></li>
         <li className={`h-3 w-3 border-2 border-yellow-500 md:hover:bg-yellow-500 rounded-full cursor-pointer ${checkColorIncludes("yellow") && "bg-yellow-500"} `} onClick={() => handleColorChange("yellow")}></li>
+        <li className={`h-3 w-3 border-2 border-red-500 md:hover:bg-red-500 rounded-full cursor-pointer ${checkColorIncludes("red") && "bg-red-500"} `} onClick={() => handleColorChange("red")}></li>
       </ul>
     </div>
   );
