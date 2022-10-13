@@ -1,8 +1,8 @@
-import { COLORCHANGED, STATUSCHANGED } from "./actionTypes";
+import { SETCOLOR, STATUSCHANGED } from "./actionTypes";
 
-export const colorChanged = (color: string, changeType: string) => {
+export const setColor = (color: string, changeType: string) => {
   return {
-    type: COLORCHANGED,
+    type: SETCOLOR,
     payload: {
       color,
       changeType,

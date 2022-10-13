@@ -1,4 +1,4 @@
-import { ADDED, ALLCOMPLETED, CLEARCOMPLETED, COLORSELECTED, DELETED, LOADED, TOGGLED } from "./actionTypes";
+import { ADDED, ALLCOMPLETED, CLEARCOMPLETED, DELETED, LOADED, SETCOLOR, TOGGLED } from "./actionTypes";
 
 const initialState: ITodos = [];
 
@@ -14,10 +14,7 @@ export const todosReducer = (state = initialState, { type, payload }: ITodosActi
       return payload.todos;
 
     case ADDED:
-      return [
-        ...state,
-        payload.todo
-      ];
+      return [...state, payload.todo];
 
     case TOGGLED:
       return state.map((todo: ITodo) => {
@@ -29,7 +26,7 @@ export const todosReducer = (state = initialState, { type, payload }: ITodosActi
         } else return todo;
       });
 
-    case COLORSELECTED:
+    case SETCOLOR:
       return state.map((todo: ITodo) => {
         if (payload.id === todo.id) {
           return {
@@ -40,6 +37,8 @@ export const todosReducer = (state = initialState, { type, payload }: ITodosActi
       });
 
     case DELETED:
+      console.log( payload.id);
+      
       return state.filter((todo: ITodo) => todo.id !== payload.id);
 
     case ALLCOMPLETED:

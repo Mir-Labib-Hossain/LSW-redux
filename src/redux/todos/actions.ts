@@ -1,4 +1,4 @@
-import { ADDED, ALLCOMPLETED, CLEARCOMPLETED, COLORSELECTED, DELETED, LOADED, TOGGLED } from "./actionTypes";
+import { ADDED, ALLCOMPLETED, CLEARCOMPLETED, DELETED, LOADED, SETCOLOR, TOGGLED } from "./actionTypes";
 
 export const loaded = (todos: ITodos) => {
   return {
@@ -7,7 +7,7 @@ export const loaded = (todos: ITodos) => {
   };
 };
 
-export const added = (todo:ITodo) => {
+export const added = (todo: ITodo) => {
   return {
     type: ADDED,
     payload: { todo },
@@ -21,9 +21,9 @@ export const toggled = (id: number) => {
   };
 };
 
-export const colorSelected = (id: number, color: string) => {
+export const setColor = (id: number, color: string) => {
   return {
-    type: COLORSELECTED,
+    type: SETCOLOR,
     payload: { id, color },
   };
 };

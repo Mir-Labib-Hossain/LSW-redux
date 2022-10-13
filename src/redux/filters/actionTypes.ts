@@ -1,3 +1,2 @@
-export const COLORCHANGED = "filters/colorchanged";
+export const SETCOLOR = "filters/setColor";
 export const STATUSCHANGED = "filters/statuschanged";
-

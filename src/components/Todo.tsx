@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
-import { colorSelected, deleted, toggled } from "../redux/todos/actions";
+import deleteTodo from "../redux/todos/thunk/deleteTodo";
+import updateColor from "../redux/todos/thunk/updateColor";
+import updateStatus from "../redux/todos/thunk/updateStatus";
 
 type Props = {
   todo: ITodo;
@@ -10,15 +12,17 @@ function Todo({ todo }: Props) {
   const dispatch = useDispatch();
 
   const handleStatus = (id: number) => {
-    dispatch(toggled(id));
+    // ignore this error
+    dispatch(updateStatus(id, completed));
   };
 
   const handleColor = (id: number, color: string) => {
-    dispatch(colorSelected(id, color));
+    // ignore this error
+    dispatch(updateColor(id, color));
   };
 
   const handleDelete = (id: number) => {
-    dispatch(deleted(id));
+    dispatch(deleteTodo(id));
   };
 
   return (

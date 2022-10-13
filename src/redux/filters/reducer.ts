@@ -1,4 +1,4 @@
-import { COLORCHANGED, STATUSCHANGED } from "./actionTypes";
+import { SETCOLOR, STATUSCHANGED } from "./actionTypes";
 
 const initialState = {
   status: "All",
@@ -13,10 +13,10 @@ const filtersReducer = (state = initialState, { type, payload }: IFiltersAction)
         status: payload.status,
       };
 
-    case COLORCHANGED:
+    case SETCOLOR:
       switch (payload.changeType) {
         case "ADD":
-          console.log(COLORCHANGED);
+          console.log(SETCOLOR);
           return {
             ...state,
             colors: [...state.colors, payload.color],

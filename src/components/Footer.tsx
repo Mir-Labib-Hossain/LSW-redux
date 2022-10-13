@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { colorChanged, statusChanged } from "../redux/filters/actions";
+import { setColor, statusChanged } from "../redux/filters/actions";
 
 type Props = {};
 
@@ -35,7 +35,7 @@ function Footer({}: Props) {
 
   const handleColorChange = (color: string) => {
     const changeType = checkColorIncludes(color) ? "REMOVE" : "ADD";
-    dispatch(colorChanged(color, changeType));
+    dispatch(setColor(color, changeType));
   };
 
   return (
