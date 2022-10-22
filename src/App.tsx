@@ -50,9 +50,7 @@ const App = () => {
         <Footer />
       </div>
 
-      <div className="w-full max-w-3xl shadow-lg rounded-lg p-6 bg-white">
-        <CompletedTodos todos={todos.filter((todo: ITodo) => todo.completed)} />
-      </div>
+      <CompletedTodos todos={todos.filter((todo: ITodo) => todo.completed)} />
     </div>
   );
 };

@@ -16,6 +16,7 @@ function Header() {
     e.preventDefault();
     // ignore this error
     dispatch(addTodo(inputedText));
+    setInputedText("");
   };
 
   const handleCompleteAll = () => {

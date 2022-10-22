@@ -1,21 +1,30 @@
 {
   "todos": [
     {
-      "id": 1,
-      "text": "Learn Vanilla JavaScript",
+      "text": "Buy 12 Eggs",
+      "completed": true,
+      "id": 5
+    },
+    {
+      "text": "kkj",
+      "completed": true,
+      "id": 6
+    },
+    {
+      "text": "new todo xoxoox",
       "completed": false,
-      "color": "green"
+      "id": 8
     },
     {
-      "id": 2,
-      "text": "Learn Modern ES6+ JavaScript",
-      "completed": true,
-      "color": "green"
+      "text": "sdf",
+      "completed": false,
+      "id": 9,
+      "color": "red"
     },
     {
-      "id": 3,
-      "text": "Learn React JS",
-      "completed": true,
+      "text": "sdaf",
+      "completed": false,
+      "id": 10,
       "color": "yellow"
     }
   ]

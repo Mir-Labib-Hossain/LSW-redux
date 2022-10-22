@@ -10,3 +10,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   </Provider>
   // </React.StrictMode>
 );
+
+// start the server -> 
+// cd lsw-json-server-todos
+// npm start
