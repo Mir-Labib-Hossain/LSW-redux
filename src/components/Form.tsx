@@ -11,11 +11,27 @@ const Form = () => {
       <div className="form-group radio">
         <label htmlFor="transaction_type">Type</label>
         <div className="radio_group">
-          <input type="radio" value="income" name="transaction_type" checked />
+          <input
+            type="radio"
+            onChange={() => {
+              console.log("onChange");
+            }}
+            value="income"
+            name="transaction_type"
+            checked
+          />
           <label htmlFor="transaction_type">Income</label>
         </div>
         <div className="radio_group">
-          <input type="radio" value="expense" name="transaction_type" placeholder="Expense" />
+          <input
+            type="radio"
+            onChange={() => {
+              console.log("onChange");
+            }}
+            value="expense"
+            name="transaction_type"
+            placeholder="Expense"
+          />
           <label htmlFor="transaction_type">Expense</label>
         </div>
       </div>

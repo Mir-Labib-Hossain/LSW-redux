@@ -1,3 +1,6 @@
+import deleteIcon from "../assets/images/delete.svg";
+import editIcon from "../assets/images/edit.svg";
+
 type Props = {};
 
 const Transaction = (props: Props) => {
@@ -7,10 +10,10 @@ const Transaction = (props: Props) => {
       <div className="right">
         <p>৳ 100</p>
         <button className="link">
-          <img className="icon" src="./images/edit.svg" />
+          <img className="icon" src={editIcon} />
         </button>
         <button className="link">
-          <img className="icon" src="./images/delete.svg" />
+          <img className="icon" src={deleteIcon} />
         </button>
       </div>
     </li>
