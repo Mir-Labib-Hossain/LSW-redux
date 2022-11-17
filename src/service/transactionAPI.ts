@@ -2,7 +2,7 @@ import { baseApiSlice } from "../app/baseApiSlice";
 interface IAddPayload {
   name: string;
   type: string;
-  amount: number;
+  amount: string;
 }
 interface IDeleteParams {
   id: number;
@@ -12,6 +12,7 @@ const transactionApi = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
     getTransaction: build.query<ITransactions, void>({
       query: () => "/transactions",
+      providesTags: ["Transaction"],
     }),
 
     addTransaction: build.mutation<any, IAddPayload>({
@@ -22,6 +23,7 @@ const transactionApi = baseApiSlice.injectEndpoints({
           body: payload,
         };
       },
+      invalidatesTags: ["Transaction"],
     }),
 
     updateTransaction: build.mutation<ITransaction, ITransaction>({
@@ -32,17 +34,19 @@ const transactionApi = baseApiSlice.injectEndpoints({
           body: payload,
         };
       },
+      invalidatesTags: ["Transaction"],
     }),
 
-    deleteTransaction: build.mutation<void, IDeleteParams>({
-      query: ({ id }: IDeleteParams) => {
+    deleteTransaction: build.mutation<void, number>({
+      query: (id: number) => {
         return {
           url: `/transactions/${id}`,
           method: "DELETE",
         };
       },
+      invalidatesTags: ["Transaction"],
     }),
   }),
 });
 
-export const { useGetTransactionQuery, useAddTransactionMutation } = transactionApi;
+export const { useGetTransactionQuery, useAddTransactionMutation, useUpdateTransactionMutation, useDeleteTransactionMutation } = transactionApi;
