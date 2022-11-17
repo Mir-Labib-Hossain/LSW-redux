@@ -1,34 +1,22 @@
 {
   "transactions": [
     {
-      "id": 1,
-      "name": "Salary from Google",
+      "name": "Uber fair",
+      "amount": 300,
+      "type": "expense",
+      "id": 1
+    },
+    {
+      "name": "Salary November 22",
+      "amount": 10000,
       "type": "income",
-      "amount": 1000000
+      "id": 2
     },
     {
-      "id": 2,
-      "name": "Family Expenses",
+      "name": "Birthday Treat",
+      "amount": 4000,
       "type": "expense",
-      "amount": 200000
-    },
-    {
-      "id": 4,
-      "name": "PizzaBurg",
-      "amount": "200",
-      "type": "income"
-    },
-    {
-      "id": 5,
-      "name": "Found2",
-      "amount": 22,
-      "type": "expense"
-    },
-    {
-      "name": "Mobile",
-      "amount": 300000,
-      "type": "expense",
-      "id": 6
+      "id": 3
     }
   ]
 }

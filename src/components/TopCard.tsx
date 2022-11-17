@@ -1,12 +1,21 @@
-type Props = {};
+type Props = {
+  transactions: ITransactions;
+};
 
-const TopCard = (props: Props) => {
+const TopCard = ({ transactions }: Props) => {
+  let balance = 0;
+  
+  transactions.map(({ type, amount }: ITransaction) => {
+    if (type === "income") balance = balance + amount;
+    else balance = balance - amount;
+  });
+
   return (
     <div className="top_card">
       <p>Your Current Balance</p>
       <h3>
         <span>৳</span>
-        <span>10500</span>
+        <span>{balance}</span>
       </h3>
     </div>
   );
