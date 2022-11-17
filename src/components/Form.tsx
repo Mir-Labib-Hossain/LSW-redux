@@ -1,55 +1,71 @@
-import { useEffect, useRef } from "react";
-import { useAddTransactionMutation } from "../service/transactionAPI";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
+import { removeEditing } from "../features/transactionSlice";
+import { useAddTransactionMutation, useUpdateTransactionMutation } from "../service/transactionAPI";
 
 const Form = () => {
-  const nameRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const amountRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const typeIncomeRef = useRef() as React.MutableRefObject<HTMLInputElement>;
-  const typeExpenseRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const [name, setName] = useState<string>("");
+  const [amount, setAmount] = useState<number>(0);
+  const [type, setType] = useState<string>("income");
 
-  const [addTransaction, { isSuccess }] = useAddTransactionMutation();
+  const editing = useAppSelector((state) => state.transaction.editing);
+  const dispatch = useAppDispatch();
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    const selectedType = typeIncomeRef.current.checked ? typeIncomeRef.current.value : typeExpenseRef.current.value;
-    addTransaction({ name: nameRef.current.value, amount: amountRef.current.value, type: selectedType });
-  }
+  const [addTransaction] = useAddTransactionMutation();
+  const [updateTransaction] = useUpdateTransactionMutation();
 
+  const handleReset = () => {
+    setName(""); // default value
+    setAmount(0); // default value
+    setType("income"); // default value
+    dispatch(removeEditing());
+  };
+  const handleSubmit = () => {
+    if (editing) updateTransaction({ id: editing.id, name, amount, type });
+    else addTransaction({ name, amount, type });
+    handleReset();
+  };
+
+  useEffect(() => {
+    if (editing) {
+      setName(editing.name);
+      setAmount(editing.amount);
+      setType(editing.type);
+    }
+  }, [editing]);
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <div className="form">
       <h3>Add new transaction</h3>
 
       <div className="form-group">
         <label htmlFor="transaction_name">Name</label>
-        <input ref={nameRef} type="text" name="transaction_name" placeholder="My Salary" />
+        <input required value={name} type="text" name="transaction_name" placeholder="Ex: PizzaBurg " onChange={(e) => setName(e.target.value)} />
       </div>
 
       <div className="form-group radio">
         <label htmlFor="transaction_type">Type</label>
         <div className="radio_group">
           <input
-            ref={typeIncomeRef}
             type="radio"
             onChange={() => {
-              console.log("onChange");
+              setType("income");
             }}
             value="income"
             name="transaction_type"
-            checked
+            checked={type === "income"}
           />
           <label htmlFor="transaction_type">Income</label>
         </div>
         <div className="radio_group">
           <input
-            ref={typeExpenseRef}
             type="radio"
             onChange={() => {
-              console.log("onChange");
+              setType("expense");
             }}
             value="expense"
             name="transaction_type"
-            placeholder="Expense"
+            checked={type === "expense"}
           />
           <label htmlFor="transaction_type">Expense</label>
         </div>
@@ -57,12 +73,18 @@ const Form = () => {
 
       <div className="form-group">
         <label htmlFor="transaction_amount">Amount</label>
-        <input ref={amountRef} type="number" placeholder="300" name="transaction_amount" />
+        <input required value={amount} type="number" placeholder="300" name="transaction_amount" onChange={(e) => setAmount(parseInt(e.target.value))} />
       </div>
 
-      <button className="btn">Add Transaction</button>
-      <button className="btn cancel_edit">Cancel Edit</button>
-    </form>
+      <button className="btn" onClick={handleSubmit}>
+        {editing ? "Update" : "Add"} Transaction
+      </button>
+      {editing && (
+        <button className="btn cancel_edit" onClick={handleReset}>
+          Cancel Editing
+        </button>
+      )}
+    </div>
   );
 };
 

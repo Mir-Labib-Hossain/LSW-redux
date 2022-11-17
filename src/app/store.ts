@@ -1,9 +1,11 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
+import transactionReducer from "../features/transactionSlice";
 import { baseApiSlice } from "./baseApiSlice";
 
 export const store = configureStore({
   reducer: {
+    transaction: transactionReducer,
     [baseApiSlice.reducerPath]: baseApiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }).concat(baseApiSlice.middleware),
