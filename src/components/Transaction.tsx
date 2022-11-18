@@ -5,15 +5,17 @@ import { addEditing } from "../features/transactionSlice";
 import { useDeleteTransactionMutation } from "../service/transactionAPI";
 
 type Props = {
-  data: ITransaction;
+  transaction: ITransaction;
 };
 
-const Transaction = ({ data }: Props) => {
-  const { id, amount, name, type } = data;
+const Transaction = ({ transaction }: Props) => {
+  const { id, amount, name, type } = transaction;
+
   const [deleteTransaction] = useDeleteTransactionMutation();
   const dispatch = useAppDispatch();
+  
   const handleDelete = () => deleteTransaction(id);
-  const handleEdit = () => dispatch(addEditing(data));
+  const handleEdit = () => dispatch(addEditing(transaction));
 
   return (
     <li className={`transaction ${type === "income" ? "income" : "expense"}`}>

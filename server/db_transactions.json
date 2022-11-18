@@ -17,6 +17,48 @@
       "amount": 4000,
       "type": "expense",
       "id": 3
+    },
+    {
+      "name": "Newest Inc",
+      "amount": 10,
+      "type": "income",
+      "id": 4
+    },
+    {
+      "name": "Visited Museum ",
+      "amount": 500,
+      "type": "expense",
+      "id": 5
+    },
+    {
+      "name": "Uber Ride Share",
+      "amount": 500,
+      "type": "income",
+      "id": 6
+    },
+    {
+      "name": "Salami",
+      "amount": 2000,
+      "type": "income",
+      "id": 7
+    },
+    {
+      "name": "Tour",
+      "amount": 3000,
+      "type": "expense",
+      "id": 8
+    },
+    {
+      "name": "Collage fee",
+      "amount": 1000,
+      "type": "expense",
+      "id": 9
+    },
+    {
+      "name": "Sultan's Dine",
+      "amount": 500,
+      "type": "expense",
+      "id": 10
     }
   ]
 }

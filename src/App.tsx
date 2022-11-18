@@ -1,19 +1,20 @@
 import React from "react";
-import Form from "./components/Form";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
-import TopCard from "./components/TopCard";
-import Transactions from "./components/Transactions";
+import Home from "./pages/home";
+import List from "./pages/list";
 import { useGetTransactionQuery } from "./service/transactionAPI";
 
 const App: React.FC = () => {
   const { data } = useGetTransactionQuery();
   return (
     <Layout>
-      <>
-        <TopCard transactions={data || []} />
-        <Form />
-        <Transactions transactions={data || []} />
-      </>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home transactions={data || []} />} />
+          <Route path="/list" element={<List transactions={data || []} />} />
+        </Routes>
+      </BrowserRouter>
     </Layout>
   );
 };

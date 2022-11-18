@@ -1,14 +1,14 @@
-type Props = {
+interface Props {
   transactions: ITransactions;
-};
+}
 
 const TopCard = ({ transactions }: Props) => {
   let balance = 0;
-  
-  transactions.map(({ type, amount }: ITransaction) => {
-    if (type === "income") balance = balance + amount;
-    else balance = balance - amount;
-  });
+  if (transactions && transactions.length > 0)
+    transactions.map(({ type, amount }: ITransaction) => {
+      if (type === "income") balance = balance + amount;
+      else balance = balance - amount;
+    });
 
   return (
     <div className="top_card">

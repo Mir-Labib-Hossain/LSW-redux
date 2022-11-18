@@ -107,7 +107,8 @@ label {
     gap: 5px;
 }
 
-.transaction {
+.transaction,.show_more {
+    
     margin: 10px 0;
     color: white;
     padding: 10px 15px;
@@ -177,8 +178,25 @@ label {
 }
 
 .conatiner_of_list_of_transactions ul {
-    max-height: 500px;
+    max-height: 800px;
     overflow-y: auto;
+}
+
+.show_more{
+    
+    max-width: 400px;
+    width: 100%;
+    justify-content: center;
+    background-color: lightgreen;
+    border: 2px solid lightgreen;
+    outline: none;
+    cursor: pointer;
+}
+
+.show_more:hover{
+    background-color: white;
+    border: 2px solid lightgreen;
+    color: lightgreen;
 }
 
 @media (max-width: 450px) {
@@ -210,7 +228,7 @@ label {
         overflow-y: auto;
     }
 
-    .transaction {
+    .transaction,.show_more {
         width: 90%;
         margin: 10px auto;
     }

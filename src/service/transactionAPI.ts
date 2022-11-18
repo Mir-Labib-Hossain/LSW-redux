@@ -1,17 +1,15 @@
 import { baseApiSlice } from "../app/baseApiSlice";
+
 interface IAddPayload {
   name: string;
   type: string;
   amount: number;
 }
-interface IDeleteParams {
-  id: number;
-}
 
 const transactionApi = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
     getTransaction: build.query<ITransactions, void>({
-      query: () => "/transactions",
+      query: () => `/transactions?_sort=id&_order=desc`,
       providesTags: ["Transaction"],
     }),
 
