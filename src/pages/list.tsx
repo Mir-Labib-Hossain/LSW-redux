@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../app/hooks";
 import Transactions from "../components/Transactions";
+import { resetFilter, setFilterSearch, setFilterType } from "../features/filterSlice";
 import useDebounce from "../hooks/useDebounce";
 
 interface Props {
@@ -8,11 +10,23 @@ interface Props {
 }
 
 function List({ transactions }: Props) {
-  const [filterType, setFilterType] = useState<string>("");
-
-  const handleChange = useDebounce((inputText: string) => {
-    console.log(inputText);
+  const { type, search } = useAppSelector((state) => state.filter);
+  const [input, setInput] = useState(search);
+  const dispatch = useAppDispatch();
+  
+  const handleFilterSearch = useDebounce((inputText: string) => {
+    dispatch(setFilterSearch(inputText));
   });
+
+  const handleChange = (inputText: string) => {
+    handleFilterSearch(inputText);
+    setInput(inputText);
+  };
+
+  const handleReset = () => {
+    dispatch(resetFilter());
+    setInput("");
+  };
 
   return (
     <>
@@ -25,11 +39,11 @@ function List({ transactions }: Props) {
             <input
               type="radio"
               onChange={() => {
-                setFilterType("income");
+                dispatch(setFilterType("income"));
               }}
               value="income"
               name="transaction_type"
-              checked={filterType === "income"}
+              checked={type === "income"}
             />
             <label htmlFor="transaction_type">Income</label>
           </div>
@@ -37,18 +51,20 @@ function List({ transactions }: Props) {
             <input
               type="radio"
               onChange={() => {
-                setFilterType("expense");
+                dispatch(setFilterType("expense"));
               }}
               value="expense"
               name="transaction_type"
-              checked={filterType === "expense"}
+              checked={type === "expense"}
             />
             <label htmlFor="transaction_type">Expense</label>
           </div>
         </div>
-        <input type="text" className="search" placeholder="Search here . . . " onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value)} />
+        <input type="text" value={input} className="search" placeholder="Search here . . . " onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value)} />
+        <button onClick={handleReset}>X</button>
       </div>
       <Transactions transactions={transactions} />
+      
     </>
   );
 }

@@ -1,5 +1,10 @@
 import { baseApiSlice } from "../app/baseApiSlice";
 
+interface IGetParams {
+  filterType: string;
+  filterSearch: String;
+}
+
 interface IAddPayload {
   name: string;
   type: string;
@@ -8,8 +13,15 @@ interface IAddPayload {
 
 const transactionApi = baseApiSlice.injectEndpoints({
   endpoints: (build) => ({
-    getTransaction: build.query<ITransactions, void>({
-      query: () => `/transactions?_sort=id&_order=desc`,
+    getTransaction: build.query<ITransactions, IGetParams>({
+      query: ({ filterType, filterSearch }: IGetParams) => {
+        let query = "";
+        if (filterType) query += `type_like=${filterType}`;
+        if (filterSearch) query += `&q=${filterSearch}`;
+        console.log(query);
+        
+        return `/transactions?_sort=id&_order=desc&${query}`;
+      },
       providesTags: ["Transaction"],
     }),
 

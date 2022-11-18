@@ -1,12 +1,14 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useAppSelector } from "./app/hooks";
 import Layout from "./components/Layout";
 import Home from "./pages/home";
 import List from "./pages/list";
 import { useGetTransactionQuery } from "./service/transactionAPI";
 
 const App: React.FC = () => {
-  const { data } = useGetTransactionQuery();
+  const { type: filterType, search: filterSearch } = useAppSelector((state) => state.filter);
+  const { data } = useGetTransactionQuery({ filterType, filterSearch });
   return (
     <Layout>
       <BrowserRouter>
