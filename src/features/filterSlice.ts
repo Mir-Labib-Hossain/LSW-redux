@@ -18,8 +18,6 @@ const filterSlice = createSlice({
     resetFilter: (state) => {
       state.type = "";
       state.search = "";
-
-      console.log(state);
     },
   },
 });

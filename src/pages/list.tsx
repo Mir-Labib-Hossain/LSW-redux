@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
+import Pagination from "../components/Pagination";
 import Transactions from "../components/Transactions";
 import { resetFilter, setFilterSearch, setFilterType } from "../features/filterSlice";
 import useDebounce from "../hooks/useDebounce";
@@ -12,8 +13,9 @@ interface Props {
 function List({ transactions }: Props) {
   const { type, search } = useAppSelector((state) => state.filter);
   const [input, setInput] = useState(search);
+  const [currentPage, setCurrentPage] = useState(1);
   const dispatch = useAppDispatch();
-  
+
   const handleFilterSearch = useDebounce((inputText: string) => {
     dispatch(setFilterSearch(inputText));
   });
@@ -28,6 +30,9 @@ function List({ transactions }: Props) {
     setInput("");
   };
 
+  const limit = 5;
+  const start = currentPage * limit - limit;
+  const end = currentPage * limit;
   return (
     <>
       <Link to="/" className="show_more">
@@ -63,8 +68,8 @@ function List({ transactions }: Props) {
         <input type="text" value={input} className="search" placeholder="Search here . . . " onChange={(e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value)} />
         <button onClick={handleReset}>X</button>
       </div>
-      <Transactions transactions={transactions} />
-      
+      <Transactions transactions={transactions.slice(start, end)} />
+      {transactions.length > limit && <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} totalPage={Math.ceil(transactions.length / limit)} />}
     </>
   );
 }

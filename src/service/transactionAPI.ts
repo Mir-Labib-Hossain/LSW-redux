@@ -18,8 +18,6 @@ const transactionApi = baseApiSlice.injectEndpoints({
         let query = "";
         if (filterType) query += `type_like=${filterType}`;
         if (filterSearch) query += `&q=${filterSearch}`;
-        console.log(query);
-        
         return `/transactions?_sort=id&_order=desc&${query}`;
       },
       providesTags: ["Transaction"],

@@ -65,6 +65,12 @@
       "amount": 10000,
       "type": "income",
       "id": 12
+    },
+    {
+      "name": "Watch",
+      "amount": 2000,
+      "type": "expense",
+      "id": 13
     }
   ]
 }
